@@ -1,0 +1,30 @@
+body,
+html,
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#game {
+  height: 540px;
+  width: 960px;
+  position: relative;
+  background-color: rgb(199, 240, 240);
+  display: grid;
+  grid-template-columns: repeat(16, 60px);
+  grid-template-rows: repeat(9, 60px);
+}
+
+.enemy {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  background-color: rgb(253, 168, 165);
+  z-index: 10;
+}
+
+.tile {
+  background: #436b5a;
+  outline: 1px solid #0002;
+  border-radius: 1px;
+}
