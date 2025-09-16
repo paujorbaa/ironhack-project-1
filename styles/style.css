@@ -19,12 +19,18 @@ html,
   height: 60px;
   width: 60px;
   position: absolute;
-  background-color: rgb(253, 168, 165);
+  background-color: rgb(252, 106, 101);
   z-index: 10;
+  border-radius: 50%;
 }
 
 .tile {
   background: #436b5a;
   outline: 1px solid #0002;
   border-radius: 1px;
+}
+
+.path {
+  background: burlywood;
+  z-index: 1;
 }
