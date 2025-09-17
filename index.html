@@ -8,9 +8,24 @@
     <script src="main.js" defer></script>
   </head>
   <body>
-    <div id="game">
-      <div class="tile"></div>
+    <div id="scene-start" class="scene">
+      <h1>Ironhack Tower Defense</h1>
+      <button id="startBtn">"start-btn"</button>
     </div>
-    <div id="hud"></div>
+<div id="scene-gameplay" class="scene hidden">
+  <div id="hud" class="hud">
+    <div class="stat">💰 <span id="moneyVal">100</span></div>
+    <div class="stat">❤️ <span id="livesVal">20</span></div>
+    <div class="stat">🌊 <span id="waveVal">1</span>/<span id="waveTotal">3</span></div>
+  </div>
+
+  <div id="game"></div>
+</div>
+    </div>
+
+    <div id="scene-end" class="scene hidden">
+      <h1 id="endMessage"></h1>
+      <button id="restartBtn">Play Again</button>
+    </div>
   </body>
 </html>
