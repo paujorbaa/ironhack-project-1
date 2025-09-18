@@ -1,3 +1,5 @@
+// hi joshua, if you want to test it just change the count property under line 50 and set them all to 1, they're already super quick for testing purposes
+
 const game = document.getElementById("game");
 const startScene = document.getElementById("scene-start");
 const gameScene = document.getElementById("scene-gameplay");
@@ -12,6 +14,7 @@ const hudWaveTotal = document.getElementById("waveTotal");
 const COLS = 16;
 const ROWS = 9;
 const TILE = 60;
+
 const path = [
   { x: -2, y: 1 },
   { x: 1, y: 1 },
@@ -27,7 +30,7 @@ const path = [
 const enemyTypes = {
   small: { hp: 10, speed: 90, lives: 1, class: "enemy small" },
   medium: { hp: 30, speed: 60, lives: 5, class: "enemy medium" },
-  quick: { hp: 20, speed: 120, lives: 3, class: "enemy quick" },
+  quick: { hp: 20, speed: 420, lives: 3, class: "enemy quick" },
   boss: { hp: 120, speed: 35, lives: 999, class: "enemy boss" },
 };
 
@@ -43,23 +46,12 @@ let money = 100;
 let lives = 10;
 
 const waves = [
-  [
-    { type: "small", count: 1, interval: 1.0 },
-    { type: "quick", count: 1, interval: 0.7, startDelay: 4 },
-  ],
-  [
-    { type: "medium", count: 6, interval: 1.2 },
-    { type: "quick", count: 6, interval: 0.9, startDelay: 6 },
-  ],
-  [
-    { type: "small", count: 5, interval: 1.0 },
-    { type: "medium", count: 3, interval: 1.2 },
-    { type: "boss", count: 1, interval: 1, startDelay: 6 },
-    { type: "quick", count: 3, interval: 0.9, startDelay: 6 },
-  ],
+  [{ type: "quick", count: 4, interval: 0.7, startDelay: 1 }],
+  [{ type: "quick", count: 1, interval: 0.7, startDelay: 1 }],
+  [{ type: "quick", count: 1, interval: 0.7, startDelay: 4 }],
 ];
 
-let lastTime = performance.now();
+let lastTime;
 
 function updateHUD() {
   hudMoney.textContent = money;
@@ -85,14 +77,14 @@ startBtn.addEventListener("click", () => {
   showScene("gameplay");
   updateHUD;
   startWave(0);
+
+  lastTime = performance.now();
   requestAnimationFrame(gameLoop);
 });
 
 restartBtn.addEventListener("click", () => {
   location.reload();
 });
-
-// GRID
 
 function buildGrid(cols = COLS, rows = ROWS) {
   game.style.setProperty("--cols", cols);
@@ -112,8 +104,6 @@ function buildGrid(cols = COLS, rows = ROWS) {
 }
 
 buildGrid();
-
-// PATH
 
 function markPathTiles() {
   for (let i = 0; i < path.length - 1; i++) {
@@ -149,9 +139,8 @@ function markPathTiles() {
     }
   }
 }
-markPathTiles();
 
-// ENEMIES
+markPathTiles();
 
 function spawnEnemy(type) {
   const stats = enemyTypes[type];
@@ -189,7 +178,6 @@ function gameLoop(timestamp) {
   const delta = (timestamp - lastTime) / 1000;
   lastTime = timestamp;
 
-  // SPAWNING
   if (spawning) {
     spawnTimer -= delta;
 
@@ -208,16 +196,16 @@ function gameLoop(timestamp) {
       } else if (enemies.length === 0) {
         spawning = false;
         currentWave++;
-
         if (currentWave < waves.length) {
           startWave(currentWave);
         } else {
+          showScene("end", "win");
           console.log("All waves finished!");
         }
       }
     }
   }
-  // MOVEMENT
+
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
     if (enemy.targetIndex < path.length) {
@@ -238,6 +226,7 @@ function gameLoop(timestamp) {
       enemy.enemyElem.style.transform = `translate(${enemy.x}px, ${enemy.y}px)`;
     }
   }
+
   for (let i = enemies.length - 1; i >= 0; i--) {
     const enemy = enemies[i];
     if (enemy.targetIndex >= path.length) {
@@ -248,6 +237,14 @@ function gameLoop(timestamp) {
       enemies.splice(i, 1);
       if (lives <= 0) {
         showScene("end", "lose");
+        return;
+      }
+      if (
+        enemies.length === 0 &&
+        !spawning &&
+        currentWave >= waves.length - 1
+      ) {
+        showScene("end", "win");
         return;
       }
       continue;
