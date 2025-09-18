@@ -1,4 +1,5 @@
 // hi joshua, if you want to test it just change the count property under line 50 and set them all to 1, they're already super quick for testing purposes
+// i know you have a bigger screen but youre supposed to play the game at 1920x1080, the border around the game will eventually be some kind of cool looking thing that doesnt blast your eyes with white
 
 const game = document.getElementById("game");
 const startScene = document.getElementById("scene-start");
