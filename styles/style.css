@@ -186,3 +186,35 @@ html,
     transform: translateY(-20px);
   }
 }
+#scene-start,
+#scene-end {
+  background: #2a7de1;
+  color: white;
+}
+#scene-start h1,
+#scene-end h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+#startBtn,
+#restartBtn {
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  background: white;
+  color: #2a7de1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+#startBtn:hover,
+#restartBtn:hover {
+  background: #1d5cad;
+  color: white;
+  transform: translateY(-1px);
+}

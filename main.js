@@ -367,9 +367,10 @@ function gameLoop(timestamp) {
       }
       if (tower.type === "arrow") {
         let hit = false;
-        let hits = 0; // track how many enemies hit
+        let hits = 0;
         for (let enemy of enemies) {
-          if (hits >= tData.pierce) break; // stop if max hits reached
+          if (hits >= tData.pierce) break;
+          d;
 
           const ex = enemy.x / TILE;
           const ey = enemy.y / TILE;
