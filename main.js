@@ -370,7 +370,6 @@ function gameLoop(timestamp) {
         let hits = 0;
         for (let enemy of enemies) {
           if (hits >= tData.pierce) break;
-          d;
 
           const ex = enemy.x / TILE;
           const ey = enemy.y / TILE;
